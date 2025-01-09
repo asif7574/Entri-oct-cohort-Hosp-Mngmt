@@ -27,7 +27,7 @@ const { id } = useParams();
      
       
   } catch (error) {
-      toast.error("failed");
+      toast.error("updation failed");
       console.log(error);
   }
 };

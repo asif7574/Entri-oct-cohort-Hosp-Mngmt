@@ -47,6 +47,9 @@ console.log("ap===",apDetails);
     const closeApModal=()=>{
       setIsModalCreateApoointmentOpen(false)
     }
+    const refreshPage = () => {
+      window.location.reload(false);
+    };
     
 
     useEffect(()=>{
@@ -127,7 +130,7 @@ console.log("ap===",apDetails);
             <div className="modal-action">
               <button className="btn bg-red-700" onClick={closeOpModal}>Close</button>
             </div>
-            <CreateOp close={closeOpModal} patient={id} name={name}/>
+            <CreateOp close={closeOpModal} patient={id} name={name} refresh={refreshPage}/>
           </div>
         </div>
       )}
@@ -137,7 +140,7 @@ console.log("ap===",apDetails);
             <div className="modal-action">
               <button className="btn bg-red-700" onClick={closeApModal}>Close</button>
             </div>
-            <CreateAppointment close={closeApModal} patient={id} name={name}/>
+            <CreateAppointment close={closeApModal} patient={id} name={name} refresh={refreshPage}/>
           </div>
         </div>
       )}

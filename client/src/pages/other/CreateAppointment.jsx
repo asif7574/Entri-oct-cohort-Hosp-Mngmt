@@ -34,8 +34,9 @@ export const CreateAppointment = (props) => {
         const response = await axiosInstance({ method: "POST", url: "/common/book-appointment", data });
         console.log(response, "====response");
         toast.success("Appointment Booked");
-        navigate(user.profile_route);
         props.close()
+        props.refresh()
+        navigate(user.profile_route);
     } catch (error) {
         toast.error(error.response.data.message);
         console.log(error);

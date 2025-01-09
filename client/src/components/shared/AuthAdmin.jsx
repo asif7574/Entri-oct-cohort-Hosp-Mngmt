@@ -18,11 +18,11 @@ export const AuthAdmin = () => {
             toast.success("Authourized");
         
         } catch (error) {
-            toast.error("S failed");
+            toast.error("Authourization failed");
             console.log(error);
         }
     };
-
+// let deact=null
   return (
     <div className="card-actions justify-end">
     <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
@@ -53,6 +53,7 @@ export const AuthAdmin = () => {
         <option value="pharmacist">pharmacist</option>
         <option value="receptionist">receptionist</option>
         <option value="admin">admin</option>
+        {/* <option value={deact}>Deactivate</option> */}
         
       </select>
    

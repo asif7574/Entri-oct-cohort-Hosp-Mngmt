@@ -27,7 +27,7 @@ const { id } = useParams();
      
       
   } catch (error) {
-      toast.error("failed");
+      toast.error("Prescription failed");
       console.log(error);
   }
 };

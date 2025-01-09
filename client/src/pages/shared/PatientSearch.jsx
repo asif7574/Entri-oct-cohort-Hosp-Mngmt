@@ -20,6 +20,9 @@ const closeModal = () => {
   setIsModalOpen(false);
   
 };
+const refreshPage = () => {
+  window.location.reload(false);
+};
 
   
   return (
@@ -72,7 +75,7 @@ const closeModal = () => {
             <div className="modal-action">
               <button className="btn bg-red-700" onClick={closeModal}>Close</button>
             </div>
-            <CreatePatient modalState={closeModal}/>
+            <CreatePatient modalState={closeModal} refresh={refreshPage}/>
           </div>
         </div>
       )}

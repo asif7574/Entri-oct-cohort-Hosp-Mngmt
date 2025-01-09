@@ -36,6 +36,7 @@ export const CreateOp = (props) => {
         console.log(response, "====response");
         toast.success("op-created");
         props.close()
+        props.refresh()
         navigate(user.profile_route);
     } catch (error) {
         toast.error(error.response.data.message);

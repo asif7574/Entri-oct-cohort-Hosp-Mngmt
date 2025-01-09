@@ -14,7 +14,7 @@ export const Pharmacy = () => {
      const [isModalCreateOpOpen, setIsModalCreateOpOpen] = useState(false);
 
     const user = {
-        save_api: "/pharmacy//create-pharmacy-bill",
+        save_api: "/pharmacy/create-pharmacy-bill",
         drug_route: "/pharmacy/get-all-drugs",
         signup_route: "/signup",
     };
@@ -110,7 +110,7 @@ export const Pharmacy = () => {
               toast.success("bill generated successfully");
             //   navigate(user.profile_route);
         } catch (error) {
-              toast.error("Log-in failed");
+              toast.error("Billing failed");
             console.log(error);
         }
     };

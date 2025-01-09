@@ -25,6 +25,7 @@ export const CreatePatient = (props) => {
         toast.success("Patient Created");
         // setIsModalOpen(true);
         props.modalState()
+        props.refresh()
         
     } catch (error) {
         toast.error("failed");
@@ -153,10 +154,12 @@ export const CreatePatient = (props) => {
             <span className="text-red-500 text-sm">{errors.age.message}</span>
           )} */}
         </div>
-
+       
         <button  type="submit" className="btn btn-primary w-full">
           Submit
         </button>
+         
+       
       </form>
     </div>
   </div>
