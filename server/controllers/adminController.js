@@ -1,5 +1,6 @@
 
 import { Employee } from "../models/employeeModel.js";
+import { Opdata } from "../models/opdataModel.js";
 
 //no front end for admin signup
 // export const adminSignup= async (req,res,next)=>{
@@ -103,6 +104,39 @@ export const getAuthPending= async (req, res, next) => {
        
         
         res.json({ message: "Waiting for auth data", data: Data });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({ message: error.message || "Internal server error" });
+    }
+};
+
+
+export const sales= async (req, res, next) => {
+    try {
+        const startOfMonth = new Date(new Date().setDate(1));
+        const endOfMonth = new Date(new Date().setMonth(new Date().getMonth() + 1, 0));
+     console.log("startOfMonth===",startOfMonth);
+     console.log("endOfMonth===",endOfMonth);
+     
+
+        const salesReport = await Opdata.aggregate([
+            {
+                $match: {
+                    createdAt: { $gte: startOfMonth, $lte: endOfMonth }
+                }
+            },
+            {
+                $group: {
+                    _id: null,
+                    totalReceptionBill: { $sum: "$reception_bill" },
+                    totalPharmacyBill: { $sum: "$pharmacy_bill" },
+                    totalBill: { $sum: "$total_bill" }
+                }
+            }
+        ]);
+
+        // res.json(salesReport);
+        
+        res.json({ message: "Waiting for auth data", data: salesReport });
     } catch (error) {
         res.status(error.statusCode || 500).json({ message: error.message || "Internal server error" });
     }

@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { axiosInstance } from "../../config/axiosInstance";
 import { AddMedicine } from "../../components/shared/AddMedicine";
+import { useFetch } from "../../hooks/useFetch";
+import { TablePharmacy } from "../../components/shared/TablePharmacy";
 
 
 export const Pharmacy = () => {
@@ -12,6 +14,10 @@ export const Pharmacy = () => {
     const [unitPrices, setUnitPrices] = useState({}); // Store unit prices for medicines
     const [inputFiledSelected, setInputFiledSelected] = useState(null);
      const [isModalCreateOpOpen, setIsModalCreateOpOpen] = useState(false);
+     const [isModalConsultedOp, setIsModalConsultedOp] = useState(false);
+     const [consOp, isLoading, error] = useFetch('/pharmacy/get-consulted-op');
+     console.log("consOp",consOp);
+     
 
     const user = {
         save_api: "/pharmacy/create-pharmacy-bill",
@@ -101,6 +107,11 @@ export const Pharmacy = () => {
     };
     // console.log("filter",filteredMedicines);
 
+    const refreshPage = () => {
+        window.location.reload(false);
+      };
+
+
     const onSubmit = async (data) => {
         try {
             console.log(data, "====data");
@@ -108,6 +119,7 @@ export const Pharmacy = () => {
               const response = await axiosInstance({ method: "POST", url: user.save_api, data });
             console.log(response, "====response");
               toast.success("bill generated successfully");
+              refreshPage()
             //   navigate(user.profile_route);
         } catch (error) {
               toast.error("Billing failed");
@@ -121,13 +133,24 @@ export const Pharmacy = () => {
     const togleOp=()=>{
       setIsModalCreateOpOpen(true)
     }
+    const togleCons=()=>{
+        setIsModalConsultedOp(true)
+    }
+    const closeConsModal=()=>{
+        setIsModalConsultedOp(false)
+    }
 
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Pharmacy Form</h1>
+            <div className="flex gap-5 ml-40">
             <button onClick={togleOp} className="btn btn-warning" >
                 Add new medicine
             </button>
+            <button onClick={togleCons} className="btn btn-accent" >
+                Consulted OP
+            </button>
+            </div>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 {/* OP Number Input */}
                 <div className="form-control">
@@ -243,6 +266,16 @@ export const Pharmacy = () => {
                           <button className="btn bg-red-700" onClick={closeOpModal}>Close</button>
                         </div>
                         <AddMedicine/>
+                      </div>
+                    </div>
+                  )}
+            {isModalConsultedOp && (
+                    <div className="modal modal-open">
+                      <div className="modal-box ">
+                        <div className="modal-action">
+                          <button className="btn bg-red-700" onClick={closeConsModal}>Close</button>
+                        </div>
+                        <TablePharmacy state={consOp}/>
                       </div>
                     </div>
                   )}

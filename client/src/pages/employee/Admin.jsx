@@ -14,9 +14,9 @@ export const Admin = () => {
   return (
     <div className=' flex flex-col items-center justify-center gap-10'>
       <div>
-        {/* <Link to={"/pharmacy"}>
-        <button className='btn btn-accent'> Patient Search</button>
-        </Link> */}
+        <Link to={"/sales"}>
+        <button className='btn btn-accent'>  Sales of this month</button>
+        </Link>
       </div>
       <div>
 

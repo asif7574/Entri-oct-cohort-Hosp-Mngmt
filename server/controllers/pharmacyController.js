@@ -47,6 +47,17 @@ export const getDrugDetails = async (req, res, next) => {
     }
 };
 
+export const getConsultedOp = async (req, res, next) => {
+    try {
+            
+            const apData = await Opdata.find({ status: ["CONSULTED"] }).sort({ createdAt: -1 }).populate("doctor").populate("patient"); 
+           
+            res.json({ message: "Consulted Appointment data fetched", data: apData });
+        } catch (error) {
+            res.status(error.statusCode || 500).json({ message: error.message || "Internal server error" });
+        }
+};
+
 
 export const createPharmacyBill = async (req, res, next) => {
     try {

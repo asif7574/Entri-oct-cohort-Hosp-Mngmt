@@ -23,6 +23,7 @@ import { Reception } from "../pages/employee/Reception";
 import { Doctor } from "../pages/employee/Doctor";
 import { ApRecDetails } from "../pages/other/ApRecDetails";
 import { OpRecDetails } from "../pages/other/OpRecDetails";
+import { SalesReport } from "../pages/shared/SalesReport";
 
 
 
@@ -95,6 +96,10 @@ export const router = createBrowserRouter([
             {
               path: "home",
               element: <LandingPage/>,
+            },
+            {
+              path: "sales",
+              element: <SalesReport/>,
             },
           ]
         },
